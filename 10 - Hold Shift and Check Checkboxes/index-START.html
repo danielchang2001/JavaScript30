@@ -115,24 +115,22 @@
       let cur = inputs.indexOf(this);
       let idx = 0;
       inputs.forEach(input => {
+        let one;
+        let two;
         if (prev > cur) {
-          if (idx >= cur && idx <= prev) {
-            if (checkFlag) {
-              inputs[idx].checked = true;
-            }
-            else {
-              inputs[idx].checked = false;
-            }
-          }
+          one = cur;
+          two = prev;
         }
         else {
-          if (idx >= prev && idx <= cur) {
-            if (checkFlag) {
-              inputs[idx].checked = true;
-            }
-            else {
-              inputs[idx].checked = false;
-            }
+          one = prev;
+          two = cur;
+        }
+        if (idx >= one && idx <= two) {
+          if (checkFlag) {
+            inputs[idx].checked = true;
+          }
+          else {
+            inputs[idx].checked = false;
           }
         }
         idx += 1;
