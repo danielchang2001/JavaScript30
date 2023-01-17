@@ -96,6 +96,56 @@
   </div>
 
 <script>
+  const items = document.querySelectorAll('.item');
+  const inputs = Array.from(items).map(item => {
+    return item.children[0];
+  })
+  let prev = -1;
+  let checkFlag = false;
+  function keyDown(e) {
+    if (prev === -1) {
+      console.log('1')
+      prev = inputs.indexOf(this);
+      checkFlag = this.checked;
+      return;
+    }
+    if (e.shiftKey == true) {
+      console.log('2')
+
+      let cur = inputs.indexOf(this);
+      let idx = 0;
+      inputs.forEach(input => {
+        if (prev > cur) {
+          if (idx >= cur && idx <= prev) {
+            if (checkFlag) {
+              inputs[idx].checked = true;
+            }
+            else {
+              inputs[idx].checked = false;
+            }
+          }
+        }
+        else {
+          if (idx >= prev && idx <= cur) {
+            if (checkFlag) {
+              inputs[idx].checked = true;
+            }
+            else {
+              inputs[idx].checked = false;
+            }
+          }
+        }
+        idx += 1;
+      })
+    }
+    else {
+      console.log('3')
+
+      prev = inputs.indexOf(this);
+      checkFlag = this.checked;
+    }
+  }
+  inputs.forEach(input => {input.addEventListener('click', keyDown)});
 </script>
 </body>
 </html>
